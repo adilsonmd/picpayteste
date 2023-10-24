@@ -5,15 +5,17 @@ public class DocumentoUtil {
     private static final int TAMANHO_CPF = 11;
     private static final int TAMANHO_CNPJ = 14;
 
-    private static String removerEspeciais(String str) {
-        String s = str == null ? "" : str.toString();
+    private static String removerEspeciais(String str) throws NullPointerException {
+        if (StringUtils.isEmpty(str)) {
+            throw new NullPointerException("String nula");
+        }
 
-        s = s.replace(".", "");
-        s = s.replace("-", "");
-        s = s.replace("/", "");
-        return s;
+        str = str.replace(".", "");
+        str = str.replace("-", "");
+        str = str.replace("/", "");
+        return str;
     }
-    public static boolean isCpfValido(String cpf) {
+    public static boolean isCpfValido(String cpf) throws NullPointerException {
         cpf = removerEspeciais(cpf);
 
         if (cpf.length() != TAMANHO_CPF) {
@@ -29,7 +31,7 @@ public class DocumentoUtil {
         return true;
     }
 
-    public static boolean isCnpjValido(String cnpj) {
+    public static boolean isCnpjValido(String cnpj) throws NullPointerException {
         cnpj = removerEspeciais(cnpj);
 
         if (cnpj.length() != TAMANHO_CNPJ) {
